@@ -1,81 +1,221 @@
 body {
-    font-family: 'Merriweather', serif; /* Use Merriweather font */
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff; /* Light background for better contrast */
+    background-image: url('greegree.jpg'); /* Optional background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4; /* Light background color */
-    background-image: url('img.jpeg')
+    color: #333; /* Dark text for readability */
 }
 
 .container {
-    max-width: 1200px; /* Set a maximum width for the container */
-    margin: auto; /* Center the container */
-    padding: 20px;
-    background: white; /* White background for the container */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 1200px; /* Increase width for horizontal layout */
+    margin: auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
-h1, h2 {
-    color: #333; /* Dark gray color for headings */
+
+
+.tabs {
+    display: flex;
+    justify-content: space-around; /* Space tabs evenly */
+    margin-bottom: 20px;
 }
 
-form {
-    margin-bottom: 20px; /* Space below the form */
+.tab-button {
+    background-color: #3498db; /* Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Add transform for hover effect */
+    flex: 1; /* Make buttons equal width */
+    font-size: 16px; /* Increase font size */
+    text-align: center; /* Center text */
+    margin: 0 5px; /* Add horizontal margin to create space between buttons */
 }
 
-label {
-    display: block; /* Make labels block elements */
-    margin: 10px 0 5px; /* Margin for spacing */
+.tab-button:hover {
+    background-color: #2980b9; /* Darker blue */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-input, select, button {
-    width: 100%; /* Full width for inputs and buttons */
-    padding: 10px; /* Padding for comfort */
-    margin-bottom: 10px; /* Space below each element */
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 4px; /* Rounded corners */
+.tab-button.active {
+    background-color: #218838; /* Green for active tab */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for active tab */
+}
+
+.tab-content {
+    display: none; /* Hide all tabs by default */
+}
+
+.tab-content.active {
+    display: block; /* Show active tab */
+}
+
+.form-row {
+    display: flex; /* Use flexbox for the row */
+    justify-content: space-between; /* Space out the form groups */
+    margin-bottom: 15px; /* Space between rows */
+}
+
+.form-group {
+    flex: 1; /* Allow each form group to take equal space */
+    min-width: 200px; /* Set a minimum width for form groups */
+    margin-right: 20px; /* Space between form groups */
+}
+
+.form-group:last-child {
+    margin-right: 0; /* Remove margin for the last item in the row */
+}
+
+.form-group label {
+    display: block; /* Ensure labels are block elements */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+input, select {
+    width: 100%; /* Make input and select elements take full width of their parent */
+    padding: 10px; /* Add padding for better touch targets */
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+input:focus, select:focus {
+    border-color: #28a745; /* Green */
+    outline: none; /* Remove default outline */
 }
 
 button {
-    background-color: #28a745; /* Green background for buttons */
-    color: white; /* White text color */
-    border: none; /* Remove default border */
-    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s; /* Add transform for hover effect */
+    width: 100%;
+    margin-top: 10px; /* Add margin for spacing */
 }
 
 button:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838; /* Darker green */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-.layout {
-    display: flex; /* Flexbox for layout */
-    justify-content: space-between; /* Space between chart and data */
+.back-button {
+    position: absolute; /* Position it relative to the nearest positioned ancestor */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    background-color: #3498db; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 15px; /* Padding for the button */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline from link */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+    z-index: 1000; /* Ensure it is above other elements */
 }
 
-.chart-container {
-    flex: 1; /* Allow chart container to grow */
-    margin-right: 20px; /* Space between chart and data */
+.back-button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-.data-container {
-    flex: 1; /* Allow data container to grow */
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(240, 248, 255, 0.9); /* Light blue with transparency */
+    border: 1px solid #b0e0e6; /* Light blue border */
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
 }
 
-table {
-    width: 100%; /* Full width for the table */
-    border-collapse: collapse; /* Collapse borders */
+.fact-button {
+    margin-top: 15px;
+    background-color: #3498db; /* Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Add transition for hover effect */
+    font-size: 16px; /* Consistent font size */
+    width: 100%; /* Full width for the button */
 }
 
-th, td {
-    padding: 10px; /* Padding for table cells */
-    text-align: left; /* Left align text */
-    border-bottom: 1px solid #ddd; /* Light gray border for rows */
+.fact-button:hover {
+    background-color: #2980b9; /* Darker blue */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-th {
-    background-color: #f2f2f2; /* Light gray background for header */
+/* Popup Styles */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px; /* Rounded corners */
+    font-family: 'Arial', sans-serif; /* Consistent font */
 }
 
-tr:hover {
-    background-color: #f1f1f1; /* Highlight row on hover */
+/* Popup Text Styles */
+.popupText {
+    font-size: 16px; /* Increase font size for readability */
+    color: #333; /* Dark gray for better contrast */
+    margin-bottom: 15px; /* Space below the text */
+}
+
+/* Close Button Styles */
+.close-button {
+    background-color: #e74c3c; /* Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Add transition for hover effect */
+    font-size: 16px; /* Consistent font size */
+    width: 100%; /* Full width for the button */
+}
+
+.close-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Overlay Styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    z-index: 999; /* Ensure it sits above the background but below content */
+    display: none; /* Initially hidden */
+}
+
+/* Show overlay when needed */
+.overlay.active {
+    display: block; /* Show overlay when active */
 }

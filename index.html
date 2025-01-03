@@ -3,77 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recycling Efficiency Tracker</title>
+    <title>Carbon Footprint Calculator</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    
+    <!-- Back to Home Button -->
+    <a href="dashboard.html" class="back-button">Back to Home</a>
+
+    <!-- Background Overlay -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Popup for displaying facts -->
+    <div class="popup" id="popup" style="display: none;">
+        <div class="popupText" id="popupText"></div>
+        <button class="close-button" id="close-popup">Close</button>
+    </div>
+
+    <!-- Main Container -->
     <div class="container">
-        <h1 class="merriweather-bold">Recycling Efficiency Tracker</h1>
+        <h1>Carbon Footprint Calculator</h1>
         
-        <form id="recycling-form">
-            <label for="material">Material Type:</label>
-            <select id="material" required>
-                <option value="">Select Material</option>
-                <option value="paper">Paper</option>
-                <option value="plastic">Plastic</option>
-                <option value="metal">Metal</option>
-                <option value="others">Others</option>
-            </select>
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('household')">Household</button>
+            <button class="tab-button" onclick="openTab('transport')">Transport</button>
+            <button class="tab-button" onclick="openTab('lifestyle')">Lifestyle</button>
+        </div>
 
-            <div id="other-material-container" style="display: none;">
-                <label for="other-material">Specify Material Type:</label>
-                <input type="text" id="other-material" placeholder="Enter material type">
+        <!-- Household Tab -->
+        <div id="household" class="tab-content active">
+            <h2>About Your Household</h2>
+            
+            <!-- First Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="num-people">Number of people in the household:</label>
+                    <input type="number" id="num-people" value="4" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country of residence:</label>
+                    <select id="country" required>
+                        <option value="">Select your country</option>
+                        <option value="USA">United States</option>
+                        <option value="Canada">Canada</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="Germany">Germany</option>
+                        <option value="India">India</option>
+                        <option value="Australia">Australia</option>
+                        <option value="China">China</option>
+                        <option value="Brazil">Brazil</option>
+                    </select>
+                </div>
             </div>
 
-            <label for="weight">Weight (kg):</label>
-            <input type="number" id="weight" required min="0">
+            <!-- Second Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="housing-size">Size of housing (m²):</label>
+                    <input type="number" id="housing-size" value="100" required>
+                </div>
 
-            <button type="submit">Submit</button>
-        </form>
-
-        <h2 class="merriweather-regular">Filter by Material</h2>
-        <select id="filter-material">
-            <option value="">All Materials</option>
-            <option value="paper">Paper</option>
-            <option value="plastic">Plastic</option>
-            <option value="metal">Metal</option>
-            <option value="others">Others</option>
-        </select>
-
-        <h2 class="merriweather-regular">Select Chart Type</h2>
-        <label for="chartType">Chart Type:</label>
-        <select id="chartType">
-            <option value="bar">Bar Chart</option>
-            <option value="line">Line Chart</option>
-            <option value="pie">Pie Chart</option>
-            <option value="radar">Radar Chart</option>
-            <option value="bubble">Bubble Chart</option>
-        </select>
-
-        <div class="layout">
-            <div class="chart-container">
-                <canvas id="myChart" width="400" height="200"></canvas>
+                <div class="form-group">
+                    <label for="housing-type">Type of housing:</label>
+                    <select id="housing-type" required>
+                        <option value="Detached">Detached</option>
+                        <option value="Semi-Detached">Semi-Detached</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Townhouse">Townhouse</option>
+                    </select>
+                </div>
             </div>
-            <div class="data-container">
-                <h2 class="merriweather-regular">Recycling Data</h2>
-                <table id="data-table">
-                    <thead>
-                        <tr>
-                            <th>Material Type</th>
-                            <th>Weight (kg)</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Data will be inserted here -->
-                    </tbody>
-                </table>
+
+            <!-- Third Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="electricity-consumption">Electricity consumption (KWh/month):</label>
+                    <input type="number" id="electricity-consumption" placeholder="I don't know the KWh/month" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="clean-energy-source">Electricity from a clean energy source:</label>
+                    <input type="number" id="clean-energy-source" value="0" required> %
+                </div>
             </div>
         </div>
+
+        <!-- Transport Tab -->
+        <div id="transport" class="tab-content">
+            <h2>Transport Details</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="intercity-train">Average hours per week traveled by Intercity Train:</label>
+                    <input type="number" id="intercity-train" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="subway">Average hours per week traveled by Subway:</label>
+                    <input type="number" id="subway" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="intercity-bus">Average hours per week traveled by Intercity Bus:</label>
+                    <input type="number" id="intercity-bus" value="0" required>
+                </div>
+                                <div class="form-group">
+                    <label for="city-bus">Average hours per week traveled by City Bus:</label>
+                    <input type="number" id="city-bus" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tram">Average hours per week traveled by Tram:</label>
+                    <input type="number" id="tram" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="bike-walk">Average hours per week traveled by Bike/Walk:</label>
+                    <input type="number" id="bike-walk" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="use-car">Do you use a car?</label>
+                    <select id="use-car" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="use-motorbike">Do you use a motorbike?</label>
+                    <select id="use-motorbike" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="private-flights">Private flights per year for all household members:</label>
+                    <input type="number" id="private-flights" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="very-long-range-flights">Very long range round-trip flights (>12000 km or >14 hours one way) per year:</label>
+                    <input type="number" id="very-long-range-flights" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="long-range-flights">Long range round-trip flights (<12000 km or <14 hours one way) per year:</label>
+                    <input type="number" id="long-range-flights" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="medium-range-flights">Medium range round-trip flights (<6000 km or <8 hours one way) per year:</label>
+                    <input type="number" id="medium-range-flights" value="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="short-range-flights">Short range round-trip flights (<3000 km or <6 hours one way) per year:</label>
+                    <input type="number" id="short-range-flights" value="0" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lifestyle Tab -->
+        <div id="lifestyle" class="tab-content">
+            <h2>About Your Lifestyle</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="preferred-diet">Your household preferred diet is:</label>
+                    <select id="preferred-diet" required>
+                        <option value="meat">Meat in most meals</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="mixed">Mixed diet</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="buy-local">Do you buy mostly local products?</label>
+                    <select id="buy-local" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="not-considering">I'm not considering this option</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="buy-environmentally-responsible">Do you buy from environmentally responsible companies?</label>
+                    <select id="buy-environmentally-responsible" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="not-considering">I'm not considering this option</option>
+                    </select>
+                </div>
+            </div>
+
+                        <div class="form-row">
+                <div class="form-group">
+                    <label for="eat-out">How many times a week does your family eat out?</label>
+                    <input type="number" id="eat-out" value="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label>How do you handle waste? I recycle or compost:</label>
+                <div class="checkbox-group">
+                    <div class="form-group">
+                        <input type="checkbox" id="recycle-food" value="Food">
+                        <label for="recycle-food">Food</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="recycle-paper" value="Paper">
+                        <label for="recycle-paper">Paper</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="recycle-tin" value="Tin cans">
+                        <label for="recycle-tin">Tin cans</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="recycle-plastic" value="Plastic">
+                        <label for="recycle-plastic">Plastic</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="recycle-glass" value="Glass">
+                        <label for="recycle-glass">Glass</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <button type="button" id="calculate-button">Calculate Carbon Footprint</button>
+        
+        <!-- Result Display -->
+        <div class="result" id="result"></div>
+        
+        <!-- Button to Show Facts -->
+        <button id="button-17" class="fact-button">Show Facts</button>
     </div>
 
     <script src="script.js"></script>
