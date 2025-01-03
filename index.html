@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycling Efficiency Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="merriweather-bold">Recycling Efficiency Tracker</h1>
+        
+        <form id="recycling-form">
+            <label for="material">Material Type:</label>
+            <select id="material" required>
+                <option value="">Select Material</option>
+                <option value="paper">Paper</option>
+                <option value="plastic">Plastic</option>
+                <option value="metal">Metal</option>
+                <option value="others">Others</option>
+            </select>
+
+            <div id="other-material-container" style="display: none;">
+                <label for="other-material">Specify Material Type:</label>
+                <input type="text" id="other-material" placeholder="Enter material type">
+            </div>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" required min="0">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2 class="merriweather-regular">Filter by Material</h2>
+        <select id="filter-material">
+            <option value="">All Materials</option>
+            <option value="paper">Paper</option>
+            <option value="plastic">Plastic</option>
+            <option value="metal">Metal</option>
+            <option value="others">Others</option>
+        </select>
+
+        <h2 class="merriweather-regular">Select Chart Type</h2>
+        <label for="chartType">Chart Type:</label>
+        <select id="chartType">
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+            <option value="pie">Pie Chart</option>
+            <option value="radar">Radar Chart</option>
+            <option value="bubble">Bubble Chart</option>
+        </select>
+
+        <div class="layout">
+            <div class="chart-container">
+                <canvas id="myChart" width="400" height="200"></canvas>
+            </div>
+            <div class="data-container">
+                <h2 class="merriweather-regular">Recycling Data</h2>
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Material Type</th>
+                            <th>Weight (kg)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+body {
+    font-family: 'Merriweather', serif; /* Use Merriweather font */
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4; /* Light background color */
+    background-image: url('img.jpeg')
+}
+
+.container {
+    max-width: 1200px; /* Set a maximum width for the container */
+    margin: auto; /* Center the container */
+    padding: 20px;
+    background: white; /* White background for the container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h1, h2 {
+    color: #333; /* Dark gray color for headings */
+}
+
+form {
+    margin-bottom: 20px; /* Space below the form */
+}
+
+label {
+    display: block; /* Make labels block elements */
+    margin: 10px 0 5px; /* Margin for spacing */
+}
+
+input, select, button {
+    width: 100%; /* Full width for inputs and buttons */
+    padding: 10px; /* Padding for comfort */
+    margin-bottom: 10px; /* Space below each element */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+button {
+    background-color: #28a745; /* Green background for buttons */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.layout {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between chart and data */
+}
+
+.chart-container {
+    flex: 1; /* Allow chart container to grow */
+    margin-right: 20px; /* Space between chart and data */
+}
+
+.data-container {
+    flex: 1; /* Allow data container to grow */
+}
+
+table {
+    width: 100%; /* Full width for the table */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+th, td {
+    padding: 10px; /* Padding for table cells */
+    text-align: left; /* Left align text */
+    border-bottom: 1px solid #ddd; /* Light gray border for rows */
+}
+
+th {
+    background-color: #f2f2f2; /* Light gray background for header */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
