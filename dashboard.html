@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustainability Insights Dashboard</title>
-    <link rel="stylesheet" href="dashboard-styles.css"> <!-- Link to the new CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="C:\Users\Sanje\OneDrive\Desktop\carbon footprint calc\dashboard-script.js" defer></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
     <header>
@@ -13,44 +15,160 @@
             <h1>Sustainability Insights Dashboard</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Carbon Footprint Calculator</a></li>
-                    <li><a href="#recycling">Recycling Tracker</a></li>
-                    <li><a href="#tips">Sustainability Tips</a></li>
-                    <li><a href="#biodiversity">Biodiversity Tracker</a></li>
+                    <li><a href="#" class="tab-link active" data-tab="home">Home</a></li>
+                    <li><a href="#" class="tab-link" data-tab="gimmicks">Gimmicks</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <article id="carbon-calculator" class="card">
-            <h2><i class="fas fa-calculator"></i> Carbon Footprint Calculator</h2>
-            <p>Estimate your carbon emissions based on your daily activities.</p>
-            <p>Click the link below to access the calculator:</p>
-            <a href="index.html" class="button">Go to Carbon Footprint Calculator</a>
-        </article>
+        <div class="content-area">
+            <div id="home" class="tab-content active">
+                <article id="carbon-calculator" class="card">
+                    <h2><i class="fas fa-calculator"></i> Carbon Footprint Calculator</h2>
+                    <p>Estimate your carbon emissions based on your daily activities.</p>
+                    <p>Click the link below to access the calculator:</p>
+                    <a href="index.html" class="button" onclick="playSound()">Go to Carbon Footprint Calculator</a>
+                </article>
 
-        <article id="recycling" class="card">
-            <h2><i class="fas fa-recycle"></i> Recycling Efficiency Tracker</h2>
-            <p>Monitor your recycling habits and improve your waste management.</p>
-            <!-- Add more content or features here -->
-        </article>
+                <article id="recycling" class="card">
+                    <h2><i class="fas fa-recycle"></i> Recycling Efficiency Tracker</h2>
+                    <p>Monitor your recycling habits and improve your waste management.</p>
+                </article>
 
-        <article id="tips" class="card">
-            <h2><i class="fas fa-leaf"></i> Sustainability Tips Generator</h2>
-            <p>Get personalized tips for eco-friendly living.</p>
-            <!-- Add more content or features here -->
-        </article>
+                <article id="tips" class="card">
+                    <h2><i class="fas fa-leaf"></i> Sustainability Tips Generator</h2>
+                    <p>Get personalized tips for eco-friendly living.</p>
+                </article>
 
-        <article id="biodiversity" class="card">
-            <h2><i class="fas fa-tree"></i> Biodiversity Tracker</h2>
-            <p>Log observations of local wildlife and plant species.</p>
-            <!-- Add more content or features here -->
-        </article>
+                <article id="biodiversity" class="card">
+                    <h2><i class="fas fa-tree"></i> Biodiversity Tracker</h2>
+                    <p>Log observations of local wildlife and plant species.</p>
+                    <a href="biodiversity-tracker.html" class="button" onclick="playSound()">Go to Biodiversity Tracker</a>
+                </article>
+
+                <article id="quiz" class="card">
+                    <h2><i class="fas fa-question-circle"></i> Interactive Quiz</h2>
+                    <button class="button" onclick="startQuiz()">Start Quiz</button>
+                    <div id="quiz-container"></div>
+                </article>
+
+                <article id="user-tips" class="card">
+                    <h2><i class="fas fa-comments"></i> User-Generated Tips</h2>
+                    <form onsubmit="submitUser Tip(event)">
+                        <textarea id="user-tip-input" placeholder="Share your sustainability tips..." required></textarea>
+                        <button type="submit" class="button">Submit</button>
+                    </form>
+                    <ul id="user-tips-list"></ul>
+                </article>
+            </div>
+
+            <div class="sidebar">
+                <h3>Actions</h3>
+                <button class="button" onclick="changeBackground()">Change Background Color</button>
+                <button class="button" onclick="showAvatarSelection()">Select Your Avatar</button>
+                <h3>Interactive Graphs</h3>
+                <div id="curve_chart" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+
+        <div id="gimmicks" class="tab-content">
+            <h2>Gimmicks</h2>
+            <p>Here are some fun and cute gimmicks to promote sustainability!</p>
+            <ul class="gimmick-list">
+                <li>🌱 <strong>Eco Tip:</strong> Did you know that turning off lights when you leave a room can save energy?</li>
+                                <li>🌍 <strong>Fun Fact:</strong> Recycling one aluminum can saves enough energy to run a TV for three hours!</li>
+                <li>🎉 <strong>Challenge:</strong> Try going a week without using single-use plastics!</li>
+                <li><a href="https://example.com/gimmick1" target="_blank">Gimmick 1</a></li>
+                <li><a href="https://example.com/gimmick2" target="_blank">Gimmick 2</a></li>
+                <li><a href="https://example.com/gimmick3" target="_blank">Gimmick 3</a></li>
+            </ul>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2023 Sustainability Insights Dashboard</p>
     </footer>
+
+    <audio id="click-sound" src="click-sound.mp3"></audio>
+
+    <script>
+        // Quiz functionality
+        const quizQuestions = [
+            {
+                question: "What is the main greenhouse gas emitted by human activities?",
+                options: ["Carbon Dioxide", "Methane", "Nitrous Oxide", "Ozone"],
+                answer: 0
+            },
+            {
+                question: "Which of the following is a renewable energy source?",
+                options: ["Coal", "Natural Gas", "Solar", "Nuclear"],
+                answer: 2
+            }
+        ];
+
+        function startQuiz() {
+            let quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = '';
+            quizQuestions.forEach((q, index) => {
+                let questionElement = document.createElement('div');
+                questionElement.innerHTML = `<p>${q.question}</p>`;
+                q.options.forEach((option, i) => {
+                    questionElement.innerHTML += `<input type="radio" name="question${index}" value="${i}"> ${option}<br>`;
+                });
+                quizContainer.appendChild(questionElement);
+            });
+            quizContainer.innerHTML += '<button onclick="submitQuiz()">Submit Quiz</button>';
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            quizQuestions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedOption && parseInt(selectedOption.value) === q.answer) {
+                    score++;
+                }
+            });
+            alert(`You scored ${score} out of ${quizQuestions.length}`);
+        }
+
+        // User-generated content
+        function submitUser Tip(event) {
+            event.preventDefault();
+            const userTip = document.getElementById('user-tip-input').value;
+            const userTipsContainer = document.getElementById('user-tips-list');
+            const tipElement = document.createElement('li');
+            tipElement.textContent = userTip;
+            userTipsContainer.appendChild(tipElement);
+            document.getElementById('user-tip-input').value = '';
+        }
+
+        function playSound() {
+            const sound = document.getElementById('click-sound');
+            sound.play();
+        }
+
+        function changeBackground() {
+            const colors = ['#f4f4f4', '#ffcccb', '#add8e6', '#90ee90', '#ffe4e1'];
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function showAvatarSelection() {
+            // Implement avatar selection logic here
+            alert("Avatar selection feature is not implemented yet.");
+        }
+
+        function selectAvatar(avatar) {
+            alert(`You have selected ${avatar}!`);
+            closeAvatarSelection();
+        }
+
+        function closeAvatarSelection() {
+            // Implement logic to close avatar selection here
+            alert("Avatar selection closed.");
+        }
+	
+    </script>
 </body>
 </html>
